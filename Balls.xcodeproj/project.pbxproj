@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E692C7681B3F5262004EEAA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692C7671B3F5262004EEAA3 /* AppDelegate.swift */; };
-		E692C76A1B3F5262004EEAA3 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E692C7691B3F5262004EEAA3 /* GameScene.sks */; };
 		E692C76C1B3F5262004EEAA3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692C76B1B3F5262004EEAA3 /* GameScene.swift */; };
 		E692C76E1B3F5262004EEAA3 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692C76D1B3F5262004EEAA3 /* GameViewController.swift */; };
 		E692C7711B3F5262004EEAA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E692C76F1B3F5262004EEAA3 /* Main.storyboard */; };
@@ -16,6 +15,9 @@
 		E692C7761B3F5262004EEAA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E692C7741B3F5262004EEAA3 /* LaunchScreen.storyboard */; };
 		E692C7811B3F5262004EEAA3 /* BallsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692C7801B3F5262004EEAA3 /* BallsTests.swift */; };
 		E692C78C1B3F5262004EEAA3 /* BallsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692C78B1B3F5262004EEAA3 /* BallsUITests.swift */; };
+		E692C79C1B3F538B004EEAA3 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = E692C79A1B3F538B004EEAA3 /* background-music-aac.caf */; };
+		E692C79D1B3F538B004EEAA3 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = E692C79B1B3F538B004EEAA3 /* pew-pew-lei.caf */; };
+		E692C79F1B3F63CD004EEAA3 /* grenade.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E692C79E1B3F63CD004EEAA3 /* grenade.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,6 @@
 /* Begin PBXFileReference section */
 		E692C7641B3F5262004EEAA3 /* Balls.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balls.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E692C7671B3F5262004EEAA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E692C7691B3F5262004EEAA3 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		E692C76B1B3F5262004EEAA3 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		E692C76D1B3F5262004EEAA3 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		E692C7701B3F5262004EEAA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +52,9 @@
 		E692C7871B3F5262004EEAA3 /* BallsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BallsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E692C78B1B3F5262004EEAA3 /* BallsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallsUITests.swift; sourceTree = "<group>"; };
 		E692C78D1B3F5262004EEAA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E692C79A1B3F538B004EEAA3 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
+		E692C79B1B3F538B004EEAA3 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
+		E692C79E1B3F63CD004EEAA3 /* grenade.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = grenade.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +106,10 @@
 			isa = PBXGroup;
 			children = (
 				E692C7671B3F5262004EEAA3 /* AppDelegate.swift */,
-				E692C7691B3F5262004EEAA3 /* GameScene.sks */,
 				E692C76B1B3F5262004EEAA3 /* GameScene.swift */,
 				E692C76D1B3F5262004EEAA3 /* GameViewController.swift */,
 				E692C76F1B3F5262004EEAA3 /* Main.storyboard */,
+				E692C7991B3F538B004EEAA3 /* Sounds */,
 				E692C7721B3F5262004EEAA3 /* Assets.xcassets */,
 				E692C7741B3F5262004EEAA3 /* LaunchScreen.storyboard */,
 				E692C7771B3F5262004EEAA3 /* Info.plist */,
@@ -129,6 +133,16 @@
 				E692C78D1B3F5262004EEAA3 /* Info.plist */,
 			);
 			path = BallsUITests;
+			sourceTree = "<group>";
+		};
+		E692C7991B3F538B004EEAA3 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				E692C79A1B3F538B004EEAA3 /* background-music-aac.caf */,
+				E692C79B1B3F538B004EEAA3 /* pew-pew-lei.caf */,
+				E692C79E1B3F63CD004EEAA3 /* grenade.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,10 +248,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E692C76A1B3F5262004EEAA3 /* GameScene.sks in Resources */,
+				E692C79C1B3F538B004EEAA3 /* background-music-aac.caf in Resources */,
 				E692C7761B3F5262004EEAA3 /* LaunchScreen.storyboard in Resources */,
 				E692C7731B3F5262004EEAA3 /* Assets.xcassets in Resources */,
 				E692C7711B3F5262004EEAA3 /* Main.storyboard in Resources */,
+				E692C79F1B3F63CD004EEAA3 /* grenade.mp3 in Resources */,
+				E692C79D1B3F538B004EEAA3 /* pew-pew-lei.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
