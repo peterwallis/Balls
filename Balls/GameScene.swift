@@ -73,7 +73,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         
         // 2
-        backgroundColor = SKColor.whiteColor()
+        backgroundColor = SKColor.blueColor()
         // 3
         player.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
         // 4
@@ -85,7 +85,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         runAction(SKAction.repeatActionForever(
             SKAction.sequence([
                 SKAction.runBlock(addMonster),
-                SKAction.waitForDuration(1.0)
+                SKAction.waitForDuration(0.25)
                 ])
             ))
         
@@ -203,6 +203,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Create the actions
         let actionMove = SKAction.moveTo(CGPoint(x: -monster.size.width/2, y: actualY), duration: NSTimeInterval(actualDuration))
+        let actionRotate = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
+        monster.runAction(SKAction.repeatActionForever(actionRotate))
+        
         let actionMoveDone = SKAction.removeFromParent()
         monster.runAction(SKAction.sequence([actionMove, actionMoveDone]))
         
