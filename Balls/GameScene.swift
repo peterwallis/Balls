@@ -11,7 +11,7 @@ func playBackgroundMusic(filename: String) {
         return
     }
     
-    let backgroundMusicPlayer: AVAudioPlayer?
+
     do {
         backgroundMusicPlayer = try AVAudioPlayer(contentsOfURL: url!)
     }
@@ -20,9 +20,9 @@ func playBackgroundMusic(filename: String) {
         return
     }
     
-    backgroundMusicPlayer!.numberOfLoops = -1
-    backgroundMusicPlayer!.prepareToPlay()
-    backgroundMusicPlayer!.play()
+    backgroundMusicPlayer.numberOfLoops = -1
+    backgroundMusicPlayer.prepareToPlay()
+    backgroundMusicPlayer.play()
 }
 
 
@@ -70,6 +70,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // 1
     let player = SKSpriteNode(imageNamed: "player")
     
+    override func willMoveFromView(view: SKView) {
+            backgroundMusicPlayer.stop()
+    }
+    
     override func didMoveToView(view: SKView) {
         
         // 2
@@ -85,15 +89,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         runAction(SKAction.repeatActionForever(
             SKAction.sequence([
                 SKAction.runBlock(addMonster),
-                SKAction.waitForDuration(0.25)
+                SKAction.waitForDuration(0.1)
                 ])
             ))
         
         playBackgroundMusic("background-music-aac.caf")
         
     }
-
-
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
@@ -163,7 +165,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 2
         if ((firstBody.categoryBitMask & PhysicsCategory.Monster != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.Projectile != 0)) {
+                if ((secondBody.node) != nil) {
                 projectileDidCollideWithMonster(firstBody.node as! SKSpriteNode, monster: secondBody.node as! SKSpriteNode)
+                }
         }
         
     }
@@ -210,5 +214,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         monster.runAction(SKAction.sequence([actionMove, actionMoveDone]))
         
     }
+    
+
     
 }
