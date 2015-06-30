@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2074F6A5-30D9-4146-8416-7BEF58475EA0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Balls</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D0E9A3D7293390BD3F3CEEFB5F7AFD100D320E02</key>
+		<string>https://github.com/peterwallis/Balls.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Balls.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D0E9A3D7293390BD3F3CEEFB5F7AFD100D320E02</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/peterwallis/Balls.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D0E9A3D7293390BD3F3CEEFB5F7AFD100D320E02</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D0E9A3D7293390BD3F3CEEFB5F7AFD100D320E02</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Balls</string>
+		</dict>
+	</array>
+</dict>
+</plist>

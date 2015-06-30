@@ -12,7 +12,6 @@
 		E692C76E1B3F5262004EEAA3 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692C76D1B3F5262004EEAA3 /* GameViewController.swift */; };
 		E692C7711B3F5262004EEAA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E692C76F1B3F5262004EEAA3 /* Main.storyboard */; };
 		E692C7731B3F5262004EEAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E692C7721B3F5262004EEAA3 /* Assets.xcassets */; };
-		E692C7761B3F5262004EEAA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E692C7741B3F5262004EEAA3 /* LaunchScreen.storyboard */; };
 		E692C7811B3F5262004EEAA3 /* BallsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692C7801B3F5262004EEAA3 /* BallsTests.swift */; };
 		E692C78C1B3F5262004EEAA3 /* BallsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692C78B1B3F5262004EEAA3 /* BallsUITests.swift */; };
 		E692C79C1B3F538B004EEAA3 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = E692C79A1B3F538B004EEAA3 /* background-music-aac.caf */; };
@@ -44,7 +43,6 @@
 		E692C76D1B3F5262004EEAA3 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		E692C7701B3F5262004EEAA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E692C7721B3F5262004EEAA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E692C7751B3F5262004EEAA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E692C7771B3F5262004EEAA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E692C77C1B3F5262004EEAA3 /* BallsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BallsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E692C7801B3F5262004EEAA3 /* BallsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallsTests.swift; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 				E692C76F1B3F5262004EEAA3 /* Main.storyboard */,
 				E692C7991B3F538B004EEAA3 /* Sounds */,
 				E692C7721B3F5262004EEAA3 /* Assets.xcassets */,
-				E692C7741B3F5262004EEAA3 /* LaunchScreen.storyboard */,
 				E692C7771B3F5262004EEAA3 /* Info.plist */,
 			);
 			path = Balls;
@@ -212,6 +209,7 @@
 				TargetAttributes = {
 					E692C7631B3F5262004EEAA3 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 8Q4N4FU2LX;
 					};
 					E692C77B1B3F5262004EEAA3 = {
 						CreatedOnToolsVersion = 7.0;
@@ -249,7 +247,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E692C79C1B3F538B004EEAA3 /* background-music-aac.caf in Resources */,
-				E692C7761B3F5262004EEAA3 /* LaunchScreen.storyboard in Resources */,
 				E692C7731B3F5262004EEAA3 /* Assets.xcassets in Resources */,
 				E692C7711B3F5262004EEAA3 /* Main.storyboard in Resources */,
 				E692C79F1B3F63CD004EEAA3 /* grenade.mp3 in Resources */,
@@ -322,14 +319,6 @@
 				E692C7701B3F5262004EEAA3 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E692C7741B3F5262004EEAA3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E692C7751B3F5262004EEAA3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -422,10 +411,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Balls/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.peterwallis.Balls;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -433,10 +426,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Balls/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.peterwallis.Balls;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -468,6 +465,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = BallsUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.peterwallis.BallsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -480,6 +478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = BallsUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.peterwallis.BallsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -507,6 +506,7 @@
 				E692C7921B3F5262004EEAA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E692C7931B3F5262004EEAA3 /* Build configuration list for PBXNativeTarget "BallsTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +515,7 @@
 				E692C7951B3F5262004EEAA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E692C7961B3F5262004EEAA3 /* Build configuration list for PBXNativeTarget "BallsUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +524,7 @@
 				E692C7981B3F5262004EEAA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,16 +7,15 @@ func playBackgroundMusic(filename: String) {
     let url = NSBundle.mainBundle().URLForResource(
         filename, withExtension: nil)
     if (url == nil) {
-        print("Could not find file: \(filename)")
+        println("Could not find file: \(filename)")
         return
     }
     
-
-    do {
-        backgroundMusicPlayer = try AVAudioPlayer(contentsOfURL: url!)
-    }
-    catch _ {
-        print("Could not create audio player")
+    var error: NSError? = nil
+    backgroundMusicPlayer =
+        AVAudioPlayer(contentsOfURL: url, error: &error)
+    if backgroundMusicPlayer == nil {
+        println("Could not create audio player: \(error!)")
         return
     }
     
@@ -89,7 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         runAction(SKAction.repeatActionForever(
             SKAction.sequence([
                 SKAction.runBlock(addMonster),
-                SKAction.waitForDuration(0.1)
+                SKAction.waitForDuration(0.05)
                 ])
             ))
         
@@ -97,13 +96,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
+
+
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    
         runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))
         
         // 1 - Choose one of the touches to work with
-        let touch = touches.first
-        let touchLocation = touch!.locationInNode(self)
+        let touch = touches.first as! UITouch
+        let touchLocation = touch.locationInNode(self)
         
         // 2 - Set up initial location of projectile
         let projectile = SKSpriteNode(imageNamed: "projectile")
@@ -136,6 +137,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 9 - Create the actions
         let actionMove = SKAction.moveTo(realDest, duration: 2.0)
+        
+        let actionRotate = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
+        projectile.runAction(SKAction.repeatActionForever(actionRotate))
+        
+        
         let actionMoveDone = SKAction.removeFromParent()
         projectile.runAction(SKAction.sequence([actionMove, actionMoveDone]))
         
@@ -165,7 +171,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 2
         if ((firstBody.categoryBitMask & PhysicsCategory.Monster != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.Projectile != 0)) {
-                if ((secondBody.node) != nil) {
+                if ((firstBody.node) != nil && (secondBody.node) != nil) {
                 projectileDidCollideWithMonster(firstBody.node as! SKSpriteNode, monster: secondBody.node as! SKSpriteNode)
                 }
         }
@@ -176,7 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
     }
     
-    func random(min min: CGFloat, max: CGFloat) -> CGFloat {
+    func random(#min: CGFloat, max: CGFloat) -> CGFloat {
         return random() * (max - min) + min
     }
     
