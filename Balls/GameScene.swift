@@ -104,14 +104,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 1 - Choose one of the touches to work with
         let touch = touches.first as! UITouch
-        let touchLocation = touch.locationInNode(self)
+        
+        // Make lots of stars in a spread
+        
+        for y in -5...5 {
+            createProjectile(touch.locationInNode(self), angleOffset:CGPoint(x: 0.0, y: 20.0 * Double(y)))
+        }
+        
+    }
+    
+    func createProjectile(touchLocation: CGPoint, angleOffset: CGPoint)
+    {
+        runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))
         
         // 2 - Set up initial location of projectile
         let projectile = SKSpriteNode(imageNamed: "projectile")
         projectile.position = player.position
         
         // 3 - Determine offset of location to projectile
-        let offset = touchLocation - projectile.position
+        let offset = touchLocation - projectile.position + angleOffset
         
         // 4 - Bail out if you are shooting down or backwards
         if (offset.x < 0) { return }
@@ -144,11 +155,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let actionMoveDone = SKAction.removeFromParent()
         projectile.runAction(SKAction.sequence([actionMove, actionMoveDone]))
-        
     }
     
+    
     func projectileDidCollideWithMonster(projectile:SKSpriteNode, monster:SKSpriteNode) {
-        print("Hit")
         projectile.removeFromParent()
         monster.removeFromParent()
         runAction(SKAction.playSoundFileNamed("grenade.mp3", waitForCompletion: false))
