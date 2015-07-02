@@ -69,16 +69,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // 1
     let player = SKSpriteNode(imageNamed: "player")
     
-    override func willMoveFromView(view: SKView) {
-            backgroundMusicPlayer.stop()
-    }
     
     override func didMoveToView(view: SKView) {
         
+        player.setScale(1.0)
         // 2
-        backgroundColor = SKColor.blueColor()
+        backgroundColor = SKColor.grayColor()
         // 3
-        player.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
+        player.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
         // 4
         addChild(player)
         
@@ -88,7 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         runAction(SKAction.repeatActionForever(
             SKAction.sequence([
                 SKAction.runBlock(addMonster),
-                SKAction.waitForDuration(0.05)
+                SKAction.waitForDuration(0.1)
                 ])
             ))
         
@@ -96,7 +94,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-
+    override func willMoveFromView(view: SKView) {
+        backgroundMusicPlayer.stop()
+    }
 
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
     
@@ -107,15 +107,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Make lots of stars in a spread
         
-        for y in -5...5 {
+        for y in -3...3 {
             createProjectile(touch.locationInNode(self), angleOffset:CGPoint(x: 0.0, y: 20.0 * Double(y)))
         }
+        
+        runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))
         
     }
     
     func createProjectile(touchLocation: CGPoint, angleOffset: CGPoint)
     {
-        runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))
         
         // 2 - Set up initial location of projectile
         let projectile = SKSpriteNode(imageNamed: "projectile")
@@ -125,7 +126,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let offset = touchLocation - projectile.position + angleOffset
         
         // 4 - Bail out if you are shooting down or backwards
-        if (offset.x < 0) { return }
+        //if (offset.x < 0) { return }
         
         // 5 - OK to add now - you've double checked position
         addChild(projectile)
@@ -149,7 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 9 - Create the actions
         let actionMove = SKAction.moveTo(realDest, duration: 2.0)
         
-        let actionRotate = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
+        let actionRotate = SKAction.rotateByAngle(CGFloat(M_PI), duration:0.25)
         projectile.runAction(SKAction.repeatActionForever(actionRotate))
         
         
@@ -221,9 +222,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Determine speed of the monster
         let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
         
+        // Determine size
+        let actualScale = CGFloat(1.0) + (random(min: CGFloat(1.0), max: CGFloat(15.0))/CGFloat(10.0))
+        monster.setScale(actualScale)
+        
         // Create the actions
         let actionMove = SKAction.moveTo(CGPoint(x: -monster.size.width/2, y: actualY), duration: NSTimeInterval(actualDuration))
-        let actionRotate = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
+        
+        let actionRotate = SKAction.rotateByAngle(random(min: CGFloat(-1.0), max: CGFloat(1.0))*CGFloat(M_PI), duration:1)
         monster.runAction(SKAction.repeatActionForever(actionRotate))
         
         let actionMoveDone = SKAction.removeFromParent()
