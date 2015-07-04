@@ -1,64 +1,12 @@
 import SpriteKit
 import AVFoundation
 
-var backgroundMusicPlayer: AVAudioPlayer!
-
-func playBackgroundMusic(filename: String) {
-    let url = NSBundle.mainBundle().URLForResource(
-        filename, withExtension: nil)
-    if (url == nil) {
-        println("Could not find file: \(filename)")
-        return
-    }
-    
-    var error: NSError? = nil
-    backgroundMusicPlayer =
-        AVAudioPlayer(contentsOfURL: url, error: &error)
-    if backgroundMusicPlayer == nil {
-        println("Could not create audio player: \(error!)")
-        return
-    }
-    
-    backgroundMusicPlayer.numberOfLoops = -1
-    backgroundMusicPlayer.prepareToPlay()
-    backgroundMusicPlayer.play()
-}
-
-
-func + (left: CGPoint, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.x + right.x, y: left.y + right.y)
-}
-
-func - (left: CGPoint, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.x - right.x, y: left.y - right.y)
-}
-
-func * (point: CGPoint, scalar: CGFloat) -> CGPoint {
-    return CGPoint(x: point.x * scalar, y: point.y * scalar)
-}
-
-func / (point: CGPoint, scalar: CGFloat) -> CGPoint {
-    return CGPoint(x: point.x / scalar, y: point.y / scalar)
-}
-
-#if !(arch(x86_64) || arch(arm64))
-    func sqrt(a: CGFloat) -> CGFloat {
-    return CGFloat(sqrtf(Float(a)))
-    }
-#endif
-
-extension CGPoint {
-    func length() -> CGFloat {
-        return sqrt(x*x + y*y)
-    }
-    
-    func normalized() -> CGPoint {
-        return self / length()
-    }
-}
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
    
+    var backgroundMusicPlayer: AVAudioPlayer!
+    let player = SKSpriteNode(imageNamed: "player")
+    let background = SKSpriteNode(imageNamed: "starfield")
+    
     struct PhysicsCategory {
         static let None      : UInt32 = 0
         static let All       : UInt32 = UInt32.max
@@ -66,10 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let Projectile: UInt32 = 0b10      // 2
     }
     
-    // 1
-    let player = SKSpriteNode(imageNamed: "player")
-    let background = SKSpriteNode(imageNamed: "starfield")
-    
+    // Main setup routine
     override func didMoveToView(view: SKView) {
         
         player.setScale(1.0)
@@ -165,7 +110,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         projectile.runAction(SKAction.sequence([actionMove, actionMoveDone]))
     }
     
-    
     func projectileDidCollideWithMonster(projectile:SKSpriteNode, monster:SKSpriteNode) {
         projectile.removeFromParent()
         monster.removeFromParent()
@@ -195,15 +139,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
     }
-    
-    func random() -> CGFloat {
-        return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
-    }
-    
-    func random(#min: CGFloat, max: CGFloat) -> CGFloat {
-        return random() * (max - min) + min
-    }
-    
+
     func addMonster() {
         
         // Create sprite
@@ -217,7 +153,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         // Determine where to spawn the monster along the Y axis
-        let actualY = random(min: monster.size.height/2, max: size.height - monster.size.height/2)
+        let actualY = random(min: monster.size.height/2,max: size.height - monster.size.height/2)
         
         // Position the monster slightly off-screen along the right edge,
         // and along a random position along the Y axis as calculated above
@@ -243,7 +179,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         monster.runAction(SKAction.sequence([actionMove, actionMoveDone]))
         
     }
-    
 
+    func playBackgroundMusic(filename: String) {
+        let url = NSBundle.mainBundle().URLForResource(
+            filename, withExtension: nil)
+        if (url == nil) {
+            println("Could not find file: \(filename)")
+            return
+        }
+        
+        var error: NSError? = nil
+        backgroundMusicPlayer =
+            AVAudioPlayer(contentsOfURL: url, error: &error)
+        if backgroundMusicPlayer == nil {
+            println("Could not create audio player: \(error!)")
+            return
+        }
+        
+        backgroundMusicPlayer.numberOfLoops = -1
+        backgroundMusicPlayer.prepareToPlay()
+        backgroundMusicPlayer.play()
+    }
+
+    // Random functions
+    
+    func random() -> CGFloat {
+        return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
+    }
+    
+    func random(#min: CGFloat, max: CGFloat) -> CGFloat {
+        return random() * (max - min) + min
+    }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
