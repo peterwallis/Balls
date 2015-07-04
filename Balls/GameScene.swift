@@ -68,13 +68,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // 1
     let player = SKSpriteNode(imageNamed: "player")
-    
+    let background = SKSpriteNode(imageNamed: "starfield")
     
     override func didMoveToView(view: SKView) {
         
         player.setScale(1.0)
-        // 2
-        backgroundColor = SKColor.grayColor()
+        backgroundColor = SKColor.clearColor()
+
+        background.setScale(2.0)
+        background.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
+        addChild(background)
+        let actionScale = SKAction.scaleBy(CGFloat(0.5), duration: 60.0)
+        background.runAction(actionScale)
+        
+        
         // 3
         player.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
         // 4
