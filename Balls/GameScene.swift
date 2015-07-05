@@ -4,8 +4,8 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
    
     var backgroundMusicPlayer: AVAudioPlayer!
-    let player = SKSpriteNode(imageNamed: "player")
-    let background = SKSpriteNode(imageNamed: "starfield")
+    let player = GameSprite(imageNamed: "player")
+    let background = GameSprite(imageNamed: "starfield")
     
     struct PhysicsCategory {
         static let None      : UInt32 = 0
@@ -20,11 +20,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.setScale(1.0)
         backgroundColor = SKColor.clearColor()
 
+        background.alpha = 0.0
         background.setScale(2.0)
         background.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
         addChild(background)
         let actionScale = SKAction.scaleBy(CGFloat(0.5), duration: 60.0)
+        let actionFadeIn = SKAction.fadeInWithDuration(3.0)
         background.runAction(actionScale)
+        background.runAction(actionFadeIn)
         
         
         // 3
@@ -38,7 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         runAction(SKAction.repeatActionForever(
             SKAction.sequence([
                 SKAction.runBlock(addMonster),
-                SKAction.waitForDuration(0.1)
+                SKAction.waitForDuration(0.5)
                 ])
             ))
         
@@ -59,9 +62,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Make lots of stars in a spread
         
-        for y in -3...3 {
+        //for y in -3...3 {
+        let y = 0
             createProjectile(touch.locationInNode(self), angleOffset:CGPoint(x: 0.0, y: 20.0 * Double(y)))
-        }
+        //}
         
         runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))
         
@@ -71,7 +75,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         
         // 2 - Set up initial location of projectile
-        let projectile = SKSpriteNode(imageNamed: "projectile")
+        let projectile = GameSprite(imageNamed: "projectile")
+        projectile.lifePoints = 1
         projectile.position = player.position
         
         // 3 - Determine offset of location to projectile
@@ -110,9 +115,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         projectile.runAction(SKAction.sequence([actionMove, actionMoveDone]))
     }
     
-    func projectileDidCollideWithMonster(projectile:SKSpriteNode, monster:SKSpriteNode) {
-        projectile.removeFromParent()
-        monster.removeFromParent()
+    func projectileDidCollideWithMonster(projectile:GameSprite, monster:GameSprite) {
+        projectile.lifePoints -= 1
+        monster.lifePoints -= 1
+        
+        //let actionScale = SKAction.scaleBy(CGFloat(0.9), duration: 1.0)
+        //monster.runAction(actionScale)
+
+        let explosion = SKEmitterNode(fileNamed: "Explosion.sks")
+        explosion.alpha = 0
+        
+        explosion.setScale(1.0 / (CGFloat(monster.lifePoints) + 1))
+        
+        monster.addChild(explosion)
+        explosion.runAction(
+            SKAction.sequence([
+                SKAction.fadeInWithDuration(0.3),
+                SKAction.fadeOutWithDuration(0.3),
+                SKAction.removeFromParent()
+                ])
+            )
+
+        
+        let actionFade = SKAction.fadeAlphaBy(CGFloat(-0.3), duration: 0.2)
+        //monster.runAction(actionFade)
+        
+        if (projectile.lifePoints <= 0) {
+            projectile.removeFromParent()
+        }
+        
+        if (monster.lifePoints <= 0) {
+            monster.runAction(
+                SKAction.sequence([
+                    SKAction.waitForDuration(0.6),
+                    SKAction.removeFromParent()
+                    ])
+            )
+        }
+        
         runAction(SKAction.playSoundFileNamed("grenade.mp3", waitForCompletion: false))
         
     }
@@ -134,7 +174,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if ((firstBody.categoryBitMask & PhysicsCategory.Monster != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.Projectile != 0)) {
                 if ((firstBody.node) != nil && (secondBody.node) != nil) {
-                projectileDidCollideWithMonster(firstBody.node as! SKSpriteNode, monster: secondBody.node as! SKSpriteNode)
+                projectileDidCollideWithMonster(secondBody.node as! GameSprite, monster: firstBody.node as! GameSprite)
                 }
         }
         
@@ -143,7 +183,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addMonster() {
         
         // Create sprite
-        let monster = SKSpriteNode(imageNamed: "monster")
+        let monster = GameSprite(imageNamed: "monster")
+        monster.lifePoints = 3
         
         monster.physicsBody = SKPhysicsBody(rectangleOfSize: monster.size) // 1
         monster.physicsBody?.dynamic = true // 2
@@ -163,7 +204,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(monster)
         
         // Determine speed of the monster
-        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
+        let actualDuration = random(min: CGFloat(6.0), max: CGFloat(10.0))
         
         // Determine size
         let actualScale = CGFloat(1.0) + (random(min: CGFloat(1.0), max: CGFloat(15.0))/CGFloat(10.0))

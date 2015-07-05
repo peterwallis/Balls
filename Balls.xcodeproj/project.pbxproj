@@ -18,6 +18,9 @@
 		E692C79C1B3F538B004EEAA3 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = E692C79A1B3F538B004EEAA3 /* background-music-aac.caf */; };
 		E692C79D1B3F538B004EEAA3 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = E692C79B1B3F538B004EEAA3 /* pew-pew-lei.caf */; };
 		E692C79F1B3F63CD004EEAA3 /* grenade.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E692C79E1B3F63CD004EEAA3 /* grenade.mp3 */; };
+		E6A8A32C1B488C8F00E5B6DD /* SpriteEnhancements.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A8A32B1B488C8F00E5B6DD /* SpriteEnhancements.swift */; };
+		E6A8A3311B489E9000E5B6DD /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = E6A8A32F1B489E9000E5B6DD /* Explosion.sks */; };
+		E6A8A3321B489E9000E5B6DD /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = E6A8A3301B489E9000E5B6DD /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		E692C79A1B3F538B004EEAA3 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
 		E692C79B1B3F538B004EEAA3 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
 		E692C79E1B3F63CD004EEAA3 /* grenade.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = grenade.mp3; sourceTree = "<group>"; };
+		E6A8A32B1B488C8F00E5B6DD /* SpriteEnhancements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteEnhancements.swift; sourceTree = "<group>"; };
+		E6A8A32F1B489E9000E5B6DD /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
+		E6A8A3301B489E9000E5B6DD /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,10 +114,13 @@
 				E692C7671B3F5262004EEAA3 /* AppDelegate.swift */,
 				E692C76B1B3F5262004EEAA3 /* GameScene.swift */,
 				71644A7D1B4869C80075C89E /* MathsHelper.swift */,
+				E6A8A32B1B488C8F00E5B6DD /* SpriteEnhancements.swift */,
 				E692C76D1B3F5262004EEAA3 /* GameViewController.swift */,
 				E692C76F1B3F5262004EEAA3 /* Main.storyboard */,
 				E692C7991B3F538B004EEAA3 /* Sounds */,
 				E692C7721B3F5262004EEAA3 /* Assets.xcassets */,
+				E6A8A32F1B489E9000E5B6DD /* Explosion.sks */,
+				E6A8A3301B489E9000E5B6DD /* spark.png */,
 				E692C7771B3F5262004EEAA3 /* Info.plist */,
 			);
 			path = Balls;
@@ -212,7 +221,7 @@
 				TargetAttributes = {
 					E692C7631B3F5262004EEAA3 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 8Q4N4FU2LX;
+						DevelopmentTeam = RLKBT8EE99;
 					};
 					E692C77B1B3F5262004EEAA3 = {
 						CreatedOnToolsVersion = 7.0;
@@ -252,8 +261,10 @@
 				E692C79C1B3F538B004EEAA3 /* background-music-aac.caf in Resources */,
 				E692C7731B3F5262004EEAA3 /* Assets.xcassets in Resources */,
 				E692C7711B3F5262004EEAA3 /* Main.storyboard in Resources */,
+				E6A8A3321B489E9000E5B6DD /* spark.png in Resources */,
 				E692C79F1B3F63CD004EEAA3 /* grenade.mp3 in Resources */,
 				E692C79D1B3F538B004EEAA3 /* pew-pew-lei.caf in Resources */,
+				E6A8A3311B489E9000E5B6DD /* Explosion.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71644A7E1B4869C80075C89E /* MathsHelper.swift in Sources */,
+				E6A8A32C1B488C8F00E5B6DD /* SpriteEnhancements.swift in Sources */,
 				E692C76C1B3F5262004EEAA3 /* GameScene.swift in Sources */,
 				E692C76E1B3F5262004EEAA3 /* GameViewController.swift in Sources */,
 				E692C7681B3F5262004EEAA3 /* AppDelegate.swift in Sources */,
@@ -364,7 +376,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -403,7 +415,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -446,6 +458,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = BallsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.peterwallis.BallsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -458,6 +471,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = BallsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.peterwallis.BallsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

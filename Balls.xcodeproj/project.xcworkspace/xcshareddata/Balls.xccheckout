@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>2074F6A5-30D9-4146-8416-7BEF58475EA0</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Balls</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>D0E9A3D7293390BD3F3CEEFB5F7AFD100D320E02</key>
 		<string>https://github.com/peterwallis/Balls.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Balls.xcodeproj/project.xcworkspace</string>
+	<string>Balls.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>D0E9A3D7293390BD3F3CEEFB5F7AFD100D320E02</key>

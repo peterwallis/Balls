@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Balls/GameScene.swift"
-            timestampString = "457303071.763157"
+            timestampString = "457741696.541046"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "touchesEnded(_:withEvent:)"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "createProjectile(_:angleOffset:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Balls/GameScene.swift"
-            timestampString = "457303071.763157"
+            timestampString = "457741696.541046"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "didMoveToView(_:)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "createProjectile(_:angleOffset:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,8 +47,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "16"
             endingLineNumber = "16"
-            landmarkName = "playBackgroundMusic(_:)"
-            landmarkType = "7">
+            landmarkName = "GameScene"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -63,23 +63,55 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "19"
             endingLineNumber = "19"
-            landmarkName = "playBackgroundMusic(_:)"
-            landmarkType = "7">
+            landmarkName = "didMoveToView(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Balls/GameScene.swift"
-            timestampString = "457303067.240056"
+            timestampString = "457741696.541046"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "willMoveFromView(_:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "createProjectile(_:angleOffset:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Balls/GameScene.swift"
+            timestampString = "457821160.777556"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "projectileDidCollideWithMonster(_:monster:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Balls/GameScene.swift"
+            timestampString = "457741696.541046"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "didMoveToView(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
