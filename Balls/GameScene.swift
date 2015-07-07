@@ -6,6 +6,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundMusicPlayer: AVAudioPlayer!
     let player = GameSprite(imageNamed: "player")
     let background = GameSprite(imageNamed: "starfield")
+    let light = SKLightNode()
     
     struct PhysicsCategory {
         static let None      : UInt32 = 0
@@ -18,8 +19,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         
         player.setScale(1.0)
+        player.zPosition = 1.0
         backgroundColor = SKColor.clearColor()
 
+        light.categoryBitMask = 1
+        light.falloff = 1
+        light.ambientColor = UIColor.whiteColor()
+        light.lightColor = UIColor.whiteColor()
+        light.shadowColor = UIColor.grayColor()
+        
+        
+        player.addChild(light)
+        
+        
         background.alpha = 0.0
         background.setScale(1.0)
         background.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
@@ -158,6 +170,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let monster = Monster(imageNamed: "monster")
         monster.name = "monster"
         monster.lifePoints = 3
+        monster.lightingBitMask = 1
         
         monster.physicsBody = SKPhysicsBody(rectangleOfSize: monster.size) // 1
         monster.physicsBody?.dynamic = true // 2
