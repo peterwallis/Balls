@@ -58,13 +58,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))
         
         // 1 - Choose one of the touches to work with
-        let touch = touches.first as! UITouch
+        //let touch = touches.first as! UITouch
         
         // Make lots of stars in a spread
         
         //for y in -3...3 {
-        let y = 0
+        
+        for item in touches {
+            let y = 0
+            let touch = item as! UITouch
             createProjectile(touch.locationInNode(self), angleOffset:CGPoint(x: 0.0, y: 20.0 * Double(y)))
+        }
+        
+        
         //}
         
         runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))

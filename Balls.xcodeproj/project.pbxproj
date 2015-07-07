@@ -93,9 +93,9 @@
 			children = (
 				E692C7671B3F5262004EEAA3 /* AppDelegate.swift */,
 				E692C76B1B3F5262004EEAA3 /* GameScene.swift */,
-				71644A7D1B4869C80075C89E /* MathsHelper.swift */,
 				E6A8A32B1B488C8F00E5B6DD /* SpriteEnhancements.swift */,
 				E692C76D1B3F5262004EEAA3 /* GameViewController.swift */,
+				71644A7D1B4869C80075C89E /* MathsHelper.swift */,
 				E692C76F1B3F5262004EEAA3 /* Main.storyboard */,
 				E692C7991B3F538B004EEAA3 /* Sounds */,
 				E692C7721B3F5262004EEAA3 /* Assets.xcassets */,
