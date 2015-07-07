@@ -14,7 +14,6 @@
 		E692C7711B3F5262004EEAA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E692C76F1B3F5262004EEAA3 /* Main.storyboard */; };
 		E692C7731B3F5262004EEAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E692C7721B3F5262004EEAA3 /* Assets.xcassets */; };
 		E692C7811B3F5262004EEAA3 /* BallsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692C7801B3F5262004EEAA3 /* BallsTests.swift */; };
-		E692C78C1B3F5262004EEAA3 /* BallsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E692C78B1B3F5262004EEAA3 /* BallsUITests.swift */; };
 		E692C79C1B3F538B004EEAA3 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = E692C79A1B3F538B004EEAA3 /* background-music-aac.caf */; };
 		E692C79D1B3F538B004EEAA3 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = E692C79B1B3F538B004EEAA3 /* pew-pew-lei.caf */; };
 		E692C79F1B3F63CD004EEAA3 /* grenade.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E692C79E1B3F63CD004EEAA3 /* grenade.mp3 */; };
@@ -25,13 +24,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		E692C77D1B3F5262004EEAA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E692C75C1B3F5262004EEAA3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E692C7631B3F5262004EEAA3;
-			remoteInfo = Balls;
-		};
-		E692C7881B3F5262004EEAA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E692C75C1B3F5262004EEAA3 /* Project object */;
 			proxyType = 1;
@@ -52,9 +44,6 @@
 		E692C77C1B3F5262004EEAA3 /* BallsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BallsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E692C7801B3F5262004EEAA3 /* BallsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallsTests.swift; sourceTree = "<group>"; };
 		E692C7821B3F5262004EEAA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E692C7871B3F5262004EEAA3 /* BallsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BallsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E692C78B1B3F5262004EEAA3 /* BallsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallsUITests.swift; sourceTree = "<group>"; };
-		E692C78D1B3F5262004EEAA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E692C79A1B3F538B004EEAA3 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
 		E692C79B1B3F538B004EEAA3 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
 		E692C79E1B3F63CD004EEAA3 /* grenade.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = grenade.mp3; sourceTree = "<group>"; };
@@ -78,13 +67,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E692C7841B3F5262004EEAA3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -93,7 +75,6 @@
 			children = (
 				E692C7661B3F5262004EEAA3 /* Balls */,
 				E692C77F1B3F5262004EEAA3 /* BallsTests */,
-				E692C78A1B3F5262004EEAA3 /* BallsUITests */,
 				E692C7651B3F5262004EEAA3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,7 +84,6 @@
 			children = (
 				E692C7641B3F5262004EEAA3 /* Balls.app */,
 				E692C77C1B3F5262004EEAA3 /* BallsTests.xctest */,
-				E692C7871B3F5262004EEAA3 /* BallsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,15 +113,6 @@
 				E692C7821B3F5262004EEAA3 /* Info.plist */,
 			);
 			path = BallsTests;
-			sourceTree = "<group>";
-		};
-		E692C78A1B3F5262004EEAA3 /* BallsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				E692C78B1B3F5262004EEAA3 /* BallsUITests.swift */,
-				E692C78D1B3F5262004EEAA3 /* Info.plist */,
-			);
-			path = BallsUITests;
 			sourceTree = "<group>";
 		};
 		E692C7991B3F538B004EEAA3 /* Sounds */ = {
@@ -192,24 +163,6 @@
 			productReference = E692C77C1B3F5262004EEAA3 /* BallsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E692C7861B3F5262004EEAA3 /* BallsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E692C7961B3F5262004EEAA3 /* Build configuration list for PBXNativeTarget "BallsUITests" */;
-			buildPhases = (
-				E692C7831B3F5262004EEAA3 /* Sources */,
-				E692C7841B3F5262004EEAA3 /* Frameworks */,
-				E692C7851B3F5262004EEAA3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E692C7891B3F5262004EEAA3 /* PBXTargetDependency */,
-			);
-			name = BallsUITests;
-			productName = BallsUITests;
-			productReference = E692C7871B3F5262004EEAA3 /* BallsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -224,10 +177,6 @@
 						DevelopmentTeam = RLKBT8EE99;
 					};
 					E692C77B1B3F5262004EEAA3 = {
-						CreatedOnToolsVersion = 7.0;
-						TestTargetID = E692C7631B3F5262004EEAA3;
-					};
-					E692C7861B3F5262004EEAA3 = {
 						CreatedOnToolsVersion = 7.0;
 						TestTargetID = E692C7631B3F5262004EEAA3;
 					};
@@ -248,7 +197,6 @@
 			targets = (
 				E692C7631B3F5262004EEAA3 /* Balls */,
 				E692C77B1B3F5262004EEAA3 /* BallsTests */,
-				E692C7861B3F5262004EEAA3 /* BallsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -269,13 +217,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E692C77A1B3F5262004EEAA3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E692C7851B3F5262004EEAA3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -305,14 +246,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E692C7831B3F5262004EEAA3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E692C78C1B3F5262004EEAA3 /* BallsUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -320,11 +253,6 @@
 			isa = PBXTargetDependency;
 			target = E692C7631B3F5262004EEAA3 /* Balls */;
 			targetProxy = E692C77D1B3F5262004EEAA3 /* PBXContainerItemProxy */;
-		};
-		E692C7891B3F5262004EEAA3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E692C7631B3F5262004EEAA3 /* Balls */;
-			targetProxy = E692C7881B3F5262004EEAA3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -479,32 +407,6 @@
 			};
 			name = Release;
 		};
-		E692C7971B3F5262004EEAA3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = BallsUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.peterwallis.BallsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Balls;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		E692C7981B3F5262004EEAA3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = BallsUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.peterwallis.BallsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = Balls;
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -531,15 +433,6 @@
 			buildConfigurations = (
 				E692C7941B3F5262004EEAA3 /* Debug */,
 				E692C7951B3F5262004EEAA3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E692C7961B3F5262004EEAA3 /* Build configuration list for PBXNativeTarget "BallsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E692C7971B3F5262004EEAA3 /* Debug */,
-				E692C7981B3F5262004EEAA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
