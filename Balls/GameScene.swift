@@ -21,14 +21,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundColor = SKColor.clearColor()
 
         background.alpha = 0.0
-        background.setScale(2.0)
+        background.setScale(1.0)
         background.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
         addChild(background)
-        let actionScale = SKAction.scaleBy(CGFloat(0.5), duration: 60.0)
+        let actionRotate = SKAction.rotateByAngle(CGFloat(M_PI), duration: 240.0)
         let actionFadeIn = SKAction.fadeInWithDuration(3.0)
-        background.runAction(actionScale)
+        background.runAction(SKAction.scaleBy(-0.1, duration: 240.0))
+        background.runAction(SKAction.repeatActionForever(actionRotate))
         background.runAction(actionFadeIn)
-        
         
         // 3
         player.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
@@ -75,8 +75,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         
         // 2 - Set up initial location of projectile
-        let projectile = GameSprite(imageNamed: "projectile")
-        projectile.lifePoints = 1
+        let projectile = Projectile(imageNamed: "projectile")
+        projectile.name = "projectile"
+        projectile.lifePoints = 2
         projectile.position = player.position
         
         // 3 - Determine offset of location to projectile
@@ -116,44 +117,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func projectileDidCollideWithMonster(projectile:GameSprite, monster:GameSprite) {
-        projectile.lifePoints -= 1
-        monster.lifePoints -= 1
         
-        //let actionScale = SKAction.scaleBy(CGFloat(0.9), duration: 1.0)
-        //monster.runAction(actionScale)
-
-        let explosion = SKEmitterNode(fileNamed: "Explosion.sks")
-        explosion.alpha = 0
-        
-        explosion.setScale(1.0 / (CGFloat(monster.lifePoints) + 1))
-        
-        monster.addChild(explosion)
-        explosion.runAction(
-            SKAction.sequence([
-                SKAction.fadeInWithDuration(0.3),
-                SKAction.fadeOutWithDuration(0.3),
-                SKAction.removeFromParent()
-                ])
-            )
-
-        
-        let actionFade = SKAction.fadeAlphaBy(CGFloat(-0.3), duration: 0.2)
-        //monster.runAction(actionFade)
-        
-        if (projectile.lifePoints <= 0) {
-            projectile.removeFromParent()
-        }
-        
-        if (monster.lifePoints <= 0) {
-            monster.runAction(
-                SKAction.sequence([
-                    SKAction.waitForDuration(0.6),
-                    SKAction.removeFromParent()
-                    ])
-            )
-        }
-        
-        runAction(SKAction.playSoundFileNamed("grenade.mp3", waitForCompletion: false))
+        projectile.hit(monster)
+        monster.hit(projectile)
         
     }
     
@@ -183,7 +149,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addMonster() {
         
         // Create sprite
-        let monster = GameSprite(imageNamed: "monster")
+        let monster = Monster(imageNamed: "monster")
+        monster.name = "monster"
         monster.lifePoints = 3
         
         monster.physicsBody = SKPhysicsBody(rectangleOfSize: monster.size) // 1
