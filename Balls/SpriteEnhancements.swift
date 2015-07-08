@@ -41,10 +41,30 @@ class Projectile: GameSprite {
         self.removeFromParent()
     }
 
+
+    
 }
 
 
 class Monster: GameSprite {
+    
+
+    
+    override func death() {
+     
+        // NOTE: Users must manually remove item from parent.
+        
+        super.death()
+        
+        self.runAction(
+                SKAction.sequence([
+                SKAction.fadeOutWithDuration(0.4),
+                SKAction.removeFromParent()
+                ])
+        )
+
+        
+    }
     
     override func hit(bySprite: GameSprite) {
         
@@ -53,7 +73,7 @@ class Monster: GameSprite {
         let explosion = SKEmitterNode(fileNamed: "Explosion.sks")
         explosion.alpha = 0
         
-        explosion.setScale(1.0 / (CGFloat(self.lifePoints) + 1))
+        explosion.setScale(2.0 / (CGFloat(self.lifePoints) + 1))
         
         self.addChild(explosion)
         explosion.runAction(
@@ -68,21 +88,5 @@ class Monster: GameSprite {
         
     }
     
-    override func death() {
-     
-        // NOTE: Users must manually remove item from parent.
-        
-        super.death()
-        
-        self.runAction(
-                SKAction.sequence([
-                SKAction.waitForDuration(0.6),
-                SKAction.fadeOutWithDuration(0.1),
-                SKAction.removeFromParent()
-                ])
-        )
-
-        
-    }
     
 }

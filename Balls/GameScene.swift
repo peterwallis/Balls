@@ -21,15 +21,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.setScale(1.0)
         player.zPosition = 1.0
         backgroundColor = SKColor.clearColor()
+        background.lightingBitMask = 1
+        background.shadowedBitMask = 1
 
         light.categoryBitMask = 1
-        light.falloff = 1
-        light.ambientColor = UIColor.whiteColor()
-        light.lightColor = UIColor.whiteColor()
-        light.shadowColor = UIColor.grayColor()
+        light.falloff = 1.0
+        light.ambientColor = SKColor.whiteColor().colorWithAlphaComponent(0.3)
+        light.lightColor = SKColor.whiteColor().colorWithAlphaComponent(0.7)
+        light.shadowColor = SKColor.blackColor().colorWithAlphaComponent(0.4)
         
         
-        player.addChild(light)
+        background.addChild(light)
         
         
         background.alpha = 0.0
@@ -53,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         runAction(SKAction.repeatActionForever(
             SKAction.sequence([
                 SKAction.runBlock(addMonster),
-                SKAction.waitForDuration(0.5)
+                SKAction.waitForDuration(0.25)
                 ])
             ))
         
@@ -95,7 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 2 - Set up initial location of projectile
         let projectile = Projectile(imageNamed: "projectile")
         projectile.name = "projectile"
-        projectile.lifePoints = 2
+        projectile.lifePoints = 1
         projectile.position = player.position
         
         // 3 - Determine offset of location to projectile
@@ -167,16 +169,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addMonster() {
         
         // Create sprite
-        let monster = Monster(imageNamed: "monster")
-        monster.name = "monster"
+        let monster = Monster(imageNamed: "asteroid")
+        monster.name = "asteroid"
         monster.lifePoints = 3
         monster.lightingBitMask = 1
+        monster.shadowedBitMask = 1
         
         monster.physicsBody = SKPhysicsBody(rectangleOfSize: monster.size) // 1
         monster.physicsBody?.dynamic = true // 2
         monster.physicsBody?.categoryBitMask = PhysicsCategory.Monster // 3
         monster.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile // 4
         monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
+
         
         
         // Determine where to spawn the monster along the Y axis
@@ -190,11 +194,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(monster)
         
         // Determine speed of the monster
-        let actualDuration = random(min: CGFloat(6.0), max: CGFloat(10.0))
+        let actualDuration = random(min: CGFloat(10.0), max: CGFloat(16.0))
         
         // Determine size
-        let actualScale = CGFloat(1.0) + (random(min: CGFloat(1.0), max: CGFloat(15.0))/CGFloat(10.0))
-        monster.setScale(actualScale)
+        let actualScale = (random(min: CGFloat(1.0), max: CGFloat(6.0)))
+        monster.setScale(actualScale / 6.0)
         
         // Create the actions
         let actionMove = SKAction.moveTo(CGPoint(x: -monster.size.width/2, y: actualY), duration: NSTimeInterval(actualDuration))
