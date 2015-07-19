@@ -7,6 +7,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let player = GameSprite(imageNamed: "player")
     let background = GameSprite(imageNamed: "starfield")
     let light = SKLightNode()
+    let monsterSpawnWait = 0.5 // seconds
+    var projectileSet: Set<NSTimer> = []
+    var scoreLabel:SKLabelNode = SKLabelNode(fontNamed:"Courier")
+    var score  = 0
     
     struct PhysicsCategory {
         static let None      : UInt32 = 0
@@ -19,19 +23,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         
         player.setScale(1.0)
-        player.zPosition = 1.0
+        player.zPosition = 0.5
+        player.shadowCastBitMask = 1
         backgroundColor = SKColor.clearColor()
         background.lightingBitMask = 1
-        background.shadowedBitMask = 1
-
+        
+        light.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
+        light.zPosition = 1
         light.categoryBitMask = 1
         light.falloff = 1.0
         light.ambientColor = SKColor.whiteColor().colorWithAlphaComponent(0.3)
         light.lightColor = SKColor.whiteColor().colorWithAlphaComponent(0.7)
-        light.shadowColor = SKColor.blackColor().colorWithAlphaComponent(0.4)
+        light.shadowColor = SKColor.blackColor().colorWithAlphaComponent(0.05)
         
         
-        background.addChild(light)
+        self.addChild(light)
+        
+        scoreLabel.fontSize = 24
+        scoreLabel.fontColor = SKColor.whiteColor()
+        scoreLabel.position = CGPoint(x: size.width * 0.98, y: size.height * 0.95)
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
+        scoreLabel.text = "\(score)"
+        
+        self.addChild(scoreLabel)
         
         
         background.alpha = 0.0
@@ -45,20 +59,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.runAction(actionFadeIn)
         
         // 3
-        player.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
+        player.position = CGPoint(x: size.width * 0.25, y: size.height * 0.5)
         // 4
         addChild(player)
         
         physicsWorld.gravity = CGVectorMake(0, 0)
         physicsWorld.contactDelegate = self
         
-        runAction(SKAction.repeatActionForever(
-            SKAction.sequence([
-                SKAction.runBlock(addMonster),
-                SKAction.waitForDuration(0.25)
-                ])
-            ))
         
+        let actBlock = SKAction.runBlock({
+            Enemy.add(self)
+        })
+        
+        let sequenceAction = SKAction.sequence([actBlock,SKAction.waitForDuration(monsterSpawnWait)])
+        
+        runAction(SKAction.repeatActionForever(sequenceAction))
+            
         playBackgroundMusic("background-music-aac.caf")
         
     }
@@ -66,30 +82,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func willMoveFromView(view: SKView) {
         backgroundMusicPlayer.stop()
     }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    
+        
+        if (touches.count <= 3 && projectileSet.count <= 3) {
+        
+            for item in touches {
+                let touch = item as! UITouch
+            
+                let timer = NSTimer.every(0.05) {
+                    self.createProjectile(touch.locationInNode(self), angleOffset:CGPoint(x: 0.0, y: 0.0))
+                }
+            
+                projectileSet.insert(timer)
+
+            }
+        } else {
+            removeProjectileSet()
+        }
+    }
 
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-    
-        runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))
         
-        // 1 - Choose one of the touches to work with
-        //let touch = touches.first as! UITouch
-        
-        // Make lots of stars in a spread
-        
-        //for y in -3...3 {
-        
-        for item in touches {
-            let y = 0
-            let touch = item as! UITouch
-            createProjectile(touch.locationInNode(self), angleOffset:CGPoint(x: 0.0, y: 20.0 * Double(y)))
-        }
-        
-        
-        //}
-        
-        runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))
+        removeProjectileSet()
         
     }
+    
+    func removeProjectileSet () {
+        for projectileTimer in projectileSet {
+            NSTimer.after(0.16) { projectileTimer.invalidate() }
+            projectileSet.remove(projectileTimer)
+        }
+    }
+    
+    func createProjectile(touchLocation: CGPoint) {
+        createProjectile(touchLocation, angleOffset:CGPoint(x: 0.0, y: 0.0))
+    }
+    
     
     func createProjectile(touchLocation: CGPoint, angleOffset: CGPoint)
     {
@@ -120,26 +150,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let direction = offset.normalized()
         
         // 7 - Make it shoot far enough to be guaranteed off screen
-        let shootAmount = direction * 1000
+        let shootAmount = direction * 1000 * -1
         
         // 8 - Add the shoot amount to the current position
         let realDest = shootAmount + projectile.position
         
         // 9 - Create the actions
-        let actionMove = SKAction.moveTo(realDest, duration: 2.0)
-        
+        let actionSound = SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false)
+        let actionMove = SKAction.sequence([SKAction.moveTo(realDest, duration: 2.0), SKAction.removeFromParent()])
         let actionRotate = SKAction.rotateByAngle(CGFloat(M_PI), duration:0.25)
-        projectile.runAction(SKAction.repeatActionForever(actionRotate))
+        let projectileAction = SKAction.group([actionSound, actionMove, actionRotate])
         
-        
-        let actionMoveDone = SKAction.removeFromParent()
-        projectile.runAction(SKAction.sequence([actionMove, actionMoveDone]))
+        projectile.runAction(projectileAction)
     }
     
     func projectileDidCollideWithMonster(projectile:GameSprite, monster:GameSprite) {
         
         projectile.hit(monster)
         monster.hit(projectile)
+        
+        score += 1
+        
+        scoreLabel.text = "\(score)"
+        
         
     }
     
@@ -166,51 +199,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
 
-    func addMonster() {
-        
-        // Create sprite
-        let monster = Monster(imageNamed: "asteroid")
-        monster.name = "asteroid"
-        monster.lifePoints = 3
-        monster.lightingBitMask = 1
-        monster.shadowedBitMask = 1
-        
-        monster.physicsBody = SKPhysicsBody(rectangleOfSize: monster.size) // 1
-        monster.physicsBody?.dynamic = true // 2
-        monster.physicsBody?.categoryBitMask = PhysicsCategory.Monster // 3
-        monster.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile // 4
-        monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
-
-        
-        
-        // Determine where to spawn the monster along the Y axis
-        let actualY = random(min: monster.size.height/2,max: size.height - monster.size.height/2)
-        
-        // Position the monster slightly off-screen along the right edge,
-        // and along a random position along the Y axis as calculated above
-        monster.position = CGPoint(x: size.width + monster.size.width/2, y: actualY)
-        
-        // Add the monster to the scene
-        addChild(monster)
-        
-        // Determine speed of the monster
-        let actualDuration = random(min: CGFloat(10.0), max: CGFloat(16.0))
-        
-        // Determine size
-        let actualScale = (random(min: CGFloat(1.0), max: CGFloat(6.0)))
-        monster.setScale(actualScale / 6.0)
-        
-        // Create the actions
-        let actionMove = SKAction.moveTo(CGPoint(x: -monster.size.width/2, y: actualY), duration: NSTimeInterval(actualDuration))
-        
-        let actionRotate = SKAction.rotateByAngle(random(min: CGFloat(-1.0), max: CGFloat(1.0))*CGFloat(M_PI), duration:1)
-        monster.runAction(SKAction.repeatActionForever(actionRotate))
-        
-        let actionMoveDone = SKAction.removeFromParent()
-        monster.runAction(SKAction.sequence([actionMove, actionMoveDone]))
-        
-    }
-
     func playBackgroundMusic(filename: String) {
         let url = NSBundle.mainBundle().URLForResource(
             filename, withExtension: nil)
@@ -232,26 +220,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundMusicPlayer.play()
     }
 
-    // Random functions
-    
-    func random() -> CGFloat {
-        return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
-    }
-    
-    func random(#min: CGFloat, max: CGFloat) -> CGFloat {
-        return random() * (max - min) + min
-    }
-    
+
 }
-
-
-
-
-
-
-
-
-
-
-
 
