@@ -11,13 +11,19 @@ import SpriteKit
 
 class GameSprite: SKSpriteNode {
     
+    var invicible:Bool = false
     var lifePoints:Int = 1   // Default number of life points.
     var damage = 1           // Damage in life points this object incurs.
     
+
+    
     func hit( bySprite:GameSprite ) {
         // decrement life points
-        lifePoints -= bySprite.damage
         
+        if (invicible == false) {
+            lifePoints -= bySprite.damage
+        }
+            
         if (lifePoints <= 0) { death() }
     }
     
@@ -25,7 +31,7 @@ class GameSprite: SKSpriteNode {
     
     func death () {
 
-        println ("death has occured to \(self.name!).")
+        //println ("death has occured to \(self.name!).")
 
     }
     

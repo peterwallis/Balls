@@ -62,7 +62,7 @@ class Enemy: GameSprite {
         monster.physicsBody = SKPhysicsBody(rectangleOfSize: monster.size) // 1
         monster.physicsBody?.dynamic = true // 2
         monster.physicsBody?.categoryBitMask = GameScene.PhysicsCategory.Monster // 3
-        monster.physicsBody?.contactTestBitMask = GameScene.PhysicsCategory.Projectile // 4
+        monster.physicsBody?.contactTestBitMask = GameScene.PhysicsCategory.Projectile | GameScene.PhysicsCategory.Player// 4
         monster.physicsBody?.collisionBitMask = GameScene.PhysicsCategory.None // 5
         
         

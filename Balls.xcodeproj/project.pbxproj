@@ -23,6 +23,8 @@
 		E6DFDF7B1B51CB5500FAF06F /* SwiftyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DFDF7A1B51CB5500FAF06F /* SwiftyTimer.swift */; };
 		E6DFDF7D1B52393000FAF06F /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DFDF7C1B52393000FAF06F /* Projectile.swift */; };
 		E6DFDF7F1B52396A00FAF06F /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DFDF7E1B52396A00FAF06F /* Enemy.swift */; };
+		E6FB0CA91B615F2700C6BBE2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FB0CA81B615F2700C6BBE2 /* Player.swift */; };
+		E6FB0CAB1B61629C00C6BBE2 /* PlayerDeath.sks in Resources */ = {isa = PBXBuildFile; fileRef = E6FB0CAA1B61629C00C6BBE2 /* PlayerDeath.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		E6DFDF7A1B51CB5500FAF06F /* SwiftyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyTimer.swift; sourceTree = "<group>"; };
 		E6DFDF7C1B52393000FAF06F /* Projectile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
 		E6DFDF7E1B52396A00FAF06F /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		E6FB0CA81B615F2700C6BBE2 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		E6FB0CAA1B61629C00C6BBE2 /* PlayerDeath.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerDeath.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 				E6DFDF7A1B51CB5500FAF06F /* SwiftyTimer.swift */,
 				E6A8A32B1B488C8F00E5B6DD /* GameSprite.swift */,
 				E6DFDF7C1B52393000FAF06F /* Projectile.swift */,
+				E6FB0CA81B615F2700C6BBE2 /* Player.swift */,
 				E6DFDF7E1B52396A00FAF06F /* Enemy.swift */,
 				E692C76D1B3F5262004EEAA3 /* GameViewController.swift */,
 				71644A7D1B4869C80075C89E /* MathsHelper.swift */,
@@ -109,6 +114,7 @@
 				E692C7991B3F538B004EEAA3 /* Sounds */,
 				E692C7721B3F5262004EEAA3 /* Assets.xcassets */,
 				E6A8A32F1B489E9000E5B6DD /* Explosion.sks */,
+				E6FB0CAA1B61629C00C6BBE2 /* PlayerDeath.sks */,
 				E6A8A3301B489E9000E5B6DD /* spark.png */,
 				E692C7771B3F5262004EEAA3 /* Info.plist */,
 			);
@@ -216,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E692C79C1B3F538B004EEAA3 /* background-music-aac.caf in Resources */,
+				E6FB0CAB1B61629C00C6BBE2 /* PlayerDeath.sks in Resources */,
 				E692C7731B3F5262004EEAA3 /* Assets.xcassets in Resources */,
 				E692C7711B3F5262004EEAA3 /* Main.storyboard in Resources */,
 				E6A8A3321B489E9000E5B6DD /* spark.png in Resources */,
@@ -246,6 +253,7 @@
 				E6DFDF7F1B52396A00FAF06F /* Enemy.swift in Sources */,
 				E6DFDF7D1B52393000FAF06F /* Projectile.swift in Sources */,
 				E692C76E1B3F5262004EEAA3 /* GameViewController.swift in Sources */,
+				E6FB0CA91B615F2700C6BBE2 /* Player.swift in Sources */,
 				E692C7681B3F5262004EEAA3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

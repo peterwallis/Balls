@@ -4,27 +4,51 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
    
     var backgroundMusicPlayer: AVAudioPlayer!
-    let player = GameSprite(imageNamed: "player")
+    var player = Player(imageNamed: "player")
     let background = GameSprite(imageNamed: "starfield")
     let light = SKLightNode()
     let monsterSpawnWait = 0.5 // seconds
     var projectileSet: Set<NSTimer> = []
-    var scoreLabel:SKLabelNode = SKLabelNode(fontNamed:"Courier")
+    var scoreLabel:SKLabelNode = SKLabelNode(text: "")
+    var gameOverLabel:SKLabelNode = SKLabelNode(text: "Game Over")
     var score  = 0
+    var gameOver = false
     
     struct PhysicsCategory {
         static let None      : UInt32 = 0
         static let All       : UInt32 = UInt32.max
         static let Monster   : UInt32 = 0b1       // 1
         static let Projectile: UInt32 = 0b10      // 2
+        static let Player    : UInt32 = 0b100     // 3
     }
     
     // Main setup routine
     override func didMoveToView(view: SKView) {
         
+        initGame()
+        
+    }
+    
+    func initGame () {
+        
+        gameOver = false
+        
+        player = Player(imageNamed: "player")
         player.setScale(1.0)
-        player.zPosition = 0.5
+        player.zPosition = 1.0
         player.shadowCastBitMask = 1
+        player.lifePoints = 1
+        
+        player.position = CGPoint(x: size.width * 0.25, y: size.height * 0.5)
+        
+        player.physicsBody = SKPhysicsBody(texture: player.texture, size: player.size) // 1
+        player.physicsBody?.dynamic = true // 2
+        player.physicsBody?.categoryBitMask = GameScene.PhysicsCategory.Player // 3
+        player.physicsBody?.contactTestBitMask = GameScene.PhysicsCategory.Monster // 4
+        player.physicsBody?.collisionBitMask = GameScene.PhysicsCategory.None // 5
+        self.addChild(player)
+        
+        
         backgroundColor = SKColor.clearColor()
         background.lightingBitMask = 1
         
@@ -54,14 +78,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(background)
         let actionRotate = SKAction.rotateByAngle(CGFloat(M_PI), duration: 240.0)
         let actionFadeIn = SKAction.fadeInWithDuration(3.0)
-        background.runAction(SKAction.scaleBy(-0.1, duration: 240.0))
+        //background.runAction(SKAction.scaleBy(-0.1, duration: 240.0))
         background.runAction(SKAction.repeatActionForever(actionRotate))
         background.runAction(actionFadeIn)
         
-        // 3
-        player.position = CGPoint(x: size.width * 0.25, y: size.height * 0.5)
-        // 4
-        addChild(player)
         
         physicsWorld.gravity = CGVectorMake(0, 0)
         physicsWorld.contactDelegate = self
@@ -73,11 +93,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let sequenceAction = SKAction.sequence([actBlock,SKAction.waitForDuration(monsterSpawnWait)])
         
-        runAction(SKAction.repeatActionForever(sequenceAction))
-            
+        runAction(SKAction.repeatActionForever(sequenceAction), withKey:"spawnEnemys")
+        
         playBackgroundMusic("background-music-aac.caf")
         
     }
+    
+    func resetGame () {
+        self.removeAllActions()
+        self.removeAllChildren()
+        initGame()
+    }
+    
+    func GameOver () {
+        
+        gameOverLabel.fontSize = 150.0
+        gameOverLabel.alpha = 0.0
+        gameOverLabel.setScale(0.5)
+        gameOverLabel.zPosition = 1.0
+        gameOverLabel.position = CGPoint(x: self.size.width * 0.5, y: self.size.height * 0.5)
+        self.addChild(gameOverLabel)
+        gameOverLabel.runAction(
+            SKAction.sequence([
+                SKAction.fadeInWithDuration(1.0)
+                ]))
+        let scaleAction = SKAction.scaleTo(1.0, duration: 1.0)
+        scaleAction.timingMode = SKActionTimingMode.EaseInEaseOut
+        gameOverLabel.runAction(scaleAction)
+        gameOver = true
+        
+        for snode in self.children {
+            if (snode is Enemy) {
+                
+                let gamesprite = snode as! Enemy
+                
+                gamesprite.runAction(SKAction.fadeOutWithDuration(2.0))
+                
+            }
+            
+        }
+        
+        removeActionForKey("spawnEnemys")
+        
+    }
+    
+    
     
     override func willMoveFromView(view: SKView) {
         backgroundMusicPlayer.stop()
@@ -85,21 +145,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
     
+        if (!gameOver) {
         
-        if (touches.count <= 3 && projectileSet.count <= 3) {
-        
-            for item in touches {
-                let touch = item as! UITouch
-            
-                let timer = NSTimer.every(0.05) {
-                    self.createProjectile(touch.locationInNode(self), angleOffset:CGPoint(x: 0.0, y: 0.0))
+            if (touches.count <= 3 && projectileSet.count <= 3) {
+                
+                for item in touches {
+                    let touch = item as! UITouch
+                    
+                    let timer = NSTimer.every(0.05) {
+                        self.createProjectile(touch.locationInNode(self), angleOffset:CGPoint(x: 0.0, y: 0.0))
+                    }
+                    
+                    projectileSet.insert(timer)
+                    
                 }
-            
-                projectileSet.insert(timer)
-
+            } else {
+                removeProjectileSet()
             }
-        } else {
-            removeProjectileSet()
+            
+        }
+        else {
+            resetGame()
         }
     }
 
@@ -150,7 +216,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let direction = offset.normalized()
         
         // 7 - Make it shoot far enough to be guaranteed off screen
-        let shootAmount = direction * 1000 * -1
+        let shootAmount = direction * 1000
         
         // 8 - Add the shoot amount to the current position
         let realDest = shootAmount + projectile.position
@@ -171,6 +237,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         score += 1
         
+        scoreLabel.alpha = 1.0
         scoreLabel.text = "\(score)"
         
         
@@ -189,12 +256,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
+        if (secondBody.node is Player) {
+            player.hit(firstBody.node as! Enemy)
+            
+            if (gameOverLabel.parent != self) {
+                GameOver()
+            
+            }
+        }
+        else
+        {
         // 2
-        if ((firstBody.categoryBitMask & PhysicsCategory.Monster != 0) &&
-            (secondBody.categoryBitMask & PhysicsCategory.Projectile != 0)) {
-                if ((firstBody.node) != nil && (secondBody.node) != nil) {
-                projectileDidCollideWithMonster(secondBody.node as! GameSprite, monster: firstBody.node as! GameSprite)
-                }
+            if ((firstBody.categoryBitMask & PhysicsCategory.Monster != 0) &&
+                (secondBody.categoryBitMask & PhysicsCategory.Projectile != 0)) {
+                    if ((firstBody.node) != nil && (secondBody.node) != nil) {
+                        projectileDidCollideWithMonster(secondBody.node as! GameSprite, monster: firstBody.node as! GameSprite)
+                    }
+            }
         }
         
     }
