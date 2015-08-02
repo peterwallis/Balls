@@ -4,7 +4,7 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
    
     var backgroundMusicPlayer: AVAudioPlayer!
-    var player = Player(imageNamed: "player")
+    var player = Player(imageNamed: "orangeball")
     let background = GameSprite(imageNamed: "starfield")
     let light = SKLightNode()
     let monsterSpawnWait = 0.5 // seconds
@@ -13,6 +13,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameOverLabel:SKLabelNode = SKLabelNode(text: "Game Over")
     var score  = 0
     var gameOver = false
+    weak var GameController:UIViewController? = nil
+    
     
     struct PhysicsCategory {
         static let None      : UInt32 = 0
@@ -33,8 +35,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         gameOver = false
         
-        player = Player(imageNamed: "player")
-        player.setScale(1.0)
+        player = Player(imageNamed: "orangeball")
+        player.setScale(0.25)
         player.zPosition = 1.0
         player.shadowCastBitMask = 1
         player.lifePoints = 1
@@ -102,7 +104,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func resetGame () {
         self.removeAllActions()
         self.removeAllChildren()
-        initGame()
+        backgroundMusicPlayer.stop()
+        GameController?.dismissViewControllerAnimated(false){}
     }
     
     func GameOver () {
