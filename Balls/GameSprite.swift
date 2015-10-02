@@ -36,7 +36,7 @@ class GameSprite: SKSpriteNode {
     }
     
     class func add(scene:SKScene) {
-        println ("GameSprite has been created.")
+        print ("GameSprite has been created.")
 
     }
     

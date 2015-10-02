@@ -4,7 +4,7 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
    
     var backgroundMusicPlayer: AVAudioPlayer!
-    var player = Player(imageNamed: "orangeball")
+    var player = Player(imageNamed: "player")
     let background = GameSprite(imageNamed: "starfield")
     let light = SKLightNode()
     let monsterSpawnWait = 0.5 // seconds
@@ -35,15 +35,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         gameOver = false
         
-        player = Player(imageNamed: "orangeball")
-        player.setScale(0.25)
+        player = Player(imageNamed: "player")
+        //player.setScale(0.15)
         player.zPosition = 1.0
         player.shadowCastBitMask = 1
         player.lifePoints = 1
         
         player.position = CGPoint(x: size.width * 0.25, y: size.height * 0.5)
         
-        player.physicsBody = SKPhysicsBody(texture: player.texture, size: player.size) // 1
+        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size) // 1
         player.physicsBody?.dynamic = true // 2
         player.physicsBody?.categoryBitMask = GameScene.PhysicsCategory.Player // 3
         player.physicsBody?.contactTestBitMask = GameScene.PhysicsCategory.Monster // 4
@@ -97,14 +97,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         runAction(SKAction.repeatActionForever(sequenceAction), withKey:"spawnEnemys")
         
-        playBackgroundMusic("background-music-aac.caf")
         
     }
     
     func resetGame () {
         self.removeAllActions()
         self.removeAllChildren()
-        backgroundMusicPlayer.stop()
         GameController?.dismissViewControllerAnimated(false){}
     }
     
@@ -143,17 +141,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func willMoveFromView(view: SKView) {
-        backgroundMusicPlayer.stop()
+    
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
     
         if (!gameOver) {
         
             if (touches.count <= 3 && projectileSet.count <= 3) {
                 
                 for item in touches {
-                    let touch = item as! UITouch
+                    let touch = item 
                     
                     let timer = NSTimer.every(0.05) {
                         self.createProjectile(touch.locationInNode(self), angleOffset:CGPoint(x: 0.0, y: 0.0))
@@ -172,7 +170,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         removeProjectileSet()
         
@@ -284,15 +282,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let url = NSBundle.mainBundle().URLForResource(
             filename, withExtension: nil)
         if (url == nil) {
-            println("Could not find file: \(filename)")
+            print("Could not find file: \(filename)")
             return
         }
         
         var error: NSError? = nil
-        backgroundMusicPlayer =
-            AVAudioPlayer(contentsOfURL: url, error: &error)
+        do {
+            backgroundMusicPlayer =
+                try AVAudioPlayer(contentsOfURL: url!)
+        } catch let error1 as NSError {
+            error = error1
+            backgroundMusicPlayer = nil
+        }
         if backgroundMusicPlayer == nil {
-            println("Could not create audio player: \(error!)")
+            print("Could not create audio player: \(error!)")
             return
         }
         

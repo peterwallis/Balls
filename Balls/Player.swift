@@ -18,12 +18,12 @@ class Player: GameSprite {
         if lifePoints <= 0 {
         
             let explosion = SKEmitterNode(fileNamed: "PlayerDeath.sks")
-            explosion.alpha = 0
+            explosion!.alpha = 0
         
-            explosion.setScale(4.0 / (CGFloat(self.lifePoints) + 1))
+            explosion!.setScale(4.0 / (CGFloat(self.lifePoints) + 1))
         
-            self.addChild(explosion)
-            explosion.runAction(
+            self.addChild(explosion!)
+            explosion!.runAction(
             SKAction.sequence([
                 SKAction.playSoundFileNamed("grenade.mp3", waitForCompletion: false),
                 SKAction.fadeInWithDuration(0.3),

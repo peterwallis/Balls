@@ -33,12 +33,12 @@ class Enemy: GameSprite {
         super.hit(bySprite)
         
         let explosion = SKEmitterNode(fileNamed: "Explosion.sks")
-        explosion.alpha = 0
+        explosion!.alpha = 0
         
-        explosion.setScale(2.0 / (CGFloat(self.lifePoints) + 1))
+        explosion!.setScale(2.0 / (CGFloat(self.lifePoints) + 1))
         
-        self.addChild(explosion)
-        explosion.runAction(
+        self.addChild(explosion!)
+        explosion!.runAction(
             SKAction.sequence([
                 SKAction.playSoundFileNamed("grenade.mp3", waitForCompletion: false),
                 SKAction.fadeInWithDuration(0.3),
@@ -67,7 +67,7 @@ class Enemy: GameSprite {
         
         
         // Determine where to spawn the monster along the Y axis
-        let actualY = mmrandom(min: scene.size.height * 0.15, scene.size.height * 0.85 )
+        let actualY = mmrandom(min: scene.size.height * 0.15, max: scene.size.height * 0.85 )
         
         // Position the monster slightly off-screen along the right edge,
         // and along a random position along the Y axis as calculated above
@@ -77,18 +77,18 @@ class Enemy: GameSprite {
         scene.addChild(monster)
         
         // Determine speed of the monster
-        let actualDuration = random(min: CGFloat(10.0), CGFloat(16.0))
+        let actualDuration = random(min: CGFloat(10.0), max: CGFloat(16.0))
         
         // Determine size
-        let actualScale = (random(min: CGFloat(1.0), CGFloat(6.0)))
+        let actualScale = (random(min: CGFloat(1.0), max: CGFloat(6.0)))
         monster.setScale(actualScale / 6.0)
         
         // Create the actions
         
-        let ydelta = (random(min: CGFloat(-500.0), CGFloat(500.0)))
+        let ydelta = (random(min: CGFloat(-500.0), max: CGFloat(500.0)))
         let actionMove = SKAction.moveTo(CGPoint(x: -scene.size.width/2, y: actualY + ydelta), duration: NSTimeInterval(actualDuration))
         
-        let actionRotate = SKAction.rotateByAngle(random(min: CGFloat(-1.0), CGFloat(1.0))*CGFloat(M_PI), duration:1)
+        let actionRotate = SKAction.rotateByAngle(random(min: CGFloat(-1.0), max: CGFloat(1.0))*CGFloat(M_PI), duration:1)
         monster.runAction(SKAction.repeatActionForever(actionRotate))
         
         let actionMoveDone = SKAction.removeFromParent()
