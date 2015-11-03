@@ -9,9 +9,29 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>BallsTv.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>E66388541BE57C80001AE065</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E663886A1BE57C81001AE065</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E66388751BE57C81001AE065</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E692C7631B3F5262004EEAA3</key>
 		<dict>
 			<key>primary</key>
